@@ -2,6 +2,8 @@ import React from 'react'
 import './login.sass'
 import {Button, Form, Input} from "antd";
 import Checkbox from "antd/es/checkbox/Checkbox";
+import {loginUser} from "../../actions/user";
+import {useDispatch} from "react-redux";
 
 const layout = {
     labelCol: { span: 8 },
@@ -13,8 +15,11 @@ const tailLayout = {
 
 const Login = () => {
 
+    const dispatch = useDispatch()
+
     const onFinish = (values) => {
         console.log('Success:', values);
+        loginUser(values, dispatch)
     };
 
     const onFinishFailed = (errorInfo) => {

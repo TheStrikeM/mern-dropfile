@@ -2,8 +2,13 @@ import React from 'react'
 import './navbar.sass'
 import logo from '../../assets/img/logo.svg'
 import {Link} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import {logoutUser} from "../../reducers/userReducer";
 
 const Navbar = () => {
+    const isAuth = useSelector(state => state.user.isAuth)
+    const dispatch = useDispatch()
+
     return (
         <div className="navbar">
             <div className="navbar__logo">
@@ -15,8 +20,9 @@ const Navbar = () => {
             </div>
 
             <div className="navbar__buttons">
-                <Link to={"/login"} className="login">Log in</Link>
-                <Link to={"/register"} className="register">Register</Link>
+                {!isAuth && <Link to={"/login"} className="login">Log in</Link>}
+                {!isAuth && <Link to={"/register"} className="register">Register</Link>}
+                {isAuth && <div onClick={() => dispatch(logoutUser())} className="register">Logout</div>}
             </div>
         </div>
     );

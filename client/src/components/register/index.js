@@ -2,6 +2,7 @@ import React from 'react'
 import './register.sass'
 import {Button, Form, Input} from "antd";
 import Checkbox from "antd/es/checkbox/Checkbox";
+import {registerUser} from "../../actions/user";
 
 const layout = {
     labelCol: { span: 8 },
@@ -14,7 +15,9 @@ const tailLayout = {
 const Register = () => {
 
     const onFinish = (values) => {
-        console.log('Success:', values);
+        console.log('Success:', values)
+
+        registerUser(values)
     };
 
     const onFinishFailed = (errorInfo) => {
